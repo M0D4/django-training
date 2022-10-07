@@ -60,5 +60,22 @@ Album.objects.count()
 
 # in 2 different ways, for each artist, list down all of his/her albums (hint: use `objects` manager and use the related object reference)
 
+for artist in Artist.objects.all():
+    artist.album_set.all()
+
+"""
+<QuerySet [<Album: The Moon>, <Album: The Moon 2>]>
+<QuerySet [<Album: Hello>]>
+<QuerySet [<Album: de7k>]>
+"""
+for artist_ in Artist.objects.all():
+    Album.objects.filter(artist=artist_)
+
+"""
+<QuerySet [<Album: The Moon>, <Album: The Moon 2>]>
+<QuerySet [<Album: Hello>]>
+<QuerySet [<Album: de7k>]>
+"""
+
 
 ```
