@@ -77,5 +77,9 @@ for artist_ in Artist.objects.all():
 <QuerySet [<Album: de7k>]>
 """
 
+# list down all albums ordered by cost then by name (cost has the higher priority)
+Album.objects.order_by("cost", "name")
+# <QuerySet [<Album: The Moon>, <Album: The Moon 2>, <Album: de7k>, <Album: Hello>]>
+
 
 ```
