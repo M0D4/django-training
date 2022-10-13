@@ -81,5 +81,7 @@ for artist_ in Artist.objects.all():
 Album.objects.order_by("cost", "name")
 # <QuerySet [<Album: The Moon>, <Album: The Moon 2>, <Album: de7k>, <Album: Hello>]>
 
+super awesome mostafa 
+99 / 100
 
 ```
