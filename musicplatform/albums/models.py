@@ -11,6 +11,8 @@ class Album(models.Model):
     release_datetime = models.DateTimeField(blank=False, null=False)
     cost = models.DecimalField(
         blank=False, max_digits=6, decimal_places=2, default=0)
+    approved = models.BooleanField(
+        default=False, help_text="Approve the album if its name is not explicit")
 
     def __str__(self):
         return self.name
