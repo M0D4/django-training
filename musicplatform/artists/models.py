@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 
 class Artist(models.Model):
     stage_name = models.CharField(
@@ -10,6 +8,9 @@ class Artist(models.Model):
 
     def __str__(self):
         return self.stage_name
+
+    def approved_albums(self):
+        return self.album_set.filter(approved=True).count()
 
     class Meta:
         ordering = ["stage_name"]

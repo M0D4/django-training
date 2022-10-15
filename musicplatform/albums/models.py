@@ -1,8 +1,6 @@
 from artists.models import Artist
 from django.db import models
 
-# Create your models here.
-
 
 class Album(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
