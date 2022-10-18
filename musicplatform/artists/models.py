@@ -5,7 +5,7 @@ from django.db.models import Q, Count
 class ArtistManager(models.Manager):
     def get_queryset(self):
         albums = Count('album', filter=Q(album__approved=True))
-        return super().get_queryset().annotate(approved_albums=albums).order_by("approved_albums")
+        return super().get_queryset().annotate(approved_albums=albums)
 
 
 class Artist(models.Model):
