@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 import artists.views
+import albums.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('artists/create', artists.views.create, name='create'),
-    path('artists/', artists.views.index, name='index')
+    path('artists/', artists.views.index, name='index'),
+    path('albums/create', albums.views.create, name='create')
 ]
