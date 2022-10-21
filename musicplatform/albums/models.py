@@ -1,12 +1,12 @@
 from artists.models import Artist
 from django.db import models
+from model_utils.models import TimeStampedModel
 
 
-class Album(models.Model):
+class Album(TimeStampedModel):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, default="New Album")
-    creation_datetime = models.DateTimeField(auto_now_add=True)
-    release_datetime = models.DateTimeField(blank=False, null=False)
+    released = models.DateTimeField(blank=False, null=False)
     cost = models.DecimalField(
         blank=False, max_digits=6, decimal_places=2, default=0)
     approved = models.BooleanField(
