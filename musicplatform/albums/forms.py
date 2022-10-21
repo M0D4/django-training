@@ -1,3 +1,4 @@
+from albums.models import Album
 from django import forms
 from artists.models import Artist
 
