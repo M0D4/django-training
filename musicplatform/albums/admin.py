@@ -3,9 +3,9 @@ from .models import Album, Artist
 
 
 class AlbumAdmin(admin.ModelAdmin):
-    fields = ['artist', 'name', 'creation_datetime',
-              'release_datetime', 'cost', 'approved']
-    readonly_fields = ['creation_datetime']
+    fields = ['artist', 'name', 'created',
+              'released', 'cost', 'approved']
+    readonly_fields = ['created']
 
 
 admin.site.register(Album, AlbumAdmin)

@@ -9,6 +9,7 @@ packages = [{include = "django_training"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 Django = "^4.1.2"
+django-model-utils = "^4.2.0"
 
 
 [build-system]
