@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Album</title>
+</head>
+
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Album details</legend>
+            {% if error_message %}
+            <p><strong style="color: red;">{{ error_message }}</strong></p>
+            {% endif %}
+            {{form.as_p}}
+            <button type="submit">Save</button>
+            {% if created %}
+            <p><strong>Album Created Successfully</strong></p>
+            {% endif %}
+        </fieldset>
+    </form>
+</body>
+
+</html>

@@ -2,7 +2,6 @@ from django.db import IntegrityError
 from django.shortcuts import render
 from artists.models import Artist
 from .forms import ArtistForm
-from django.http import HttpResponse
 
 app_name = 'artists'
 
