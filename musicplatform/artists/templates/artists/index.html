@@ -11,28 +11,28 @@
     {% if artist_list %}
     <span>Artist:</span><br />
     <ul>
-      {% for artist in artist_list %}
-      <li>id: {{artist.id}}</li>
+      {% for artist in artist_list %} {% if forloop.counter != 1%}
+      <li>---</li>
+      {% endif %}
+      <li>id: {{forloop.counter}}</li>
       <li>Stage name: {{artist.stage_name}}</li>
       <li>Social: {{artist.social_link}}</li>
       {% if artist.album_set.all %}
       <li>Albums:</li>
       <ul>
-        {% for album in artist.album_set.all %}
-        <li>id: {{album.id}}</li>
+        {% for album in artist.album_set.all %} {% if forloop.counter != 1%}
+        <li>---</li>
+        {% endif %}
+        <li>id: {{forloop.counter}}</li>
         <li>Name: {{album.name}}</li>
         <li>Creation Time: {{album.created}}</li>
         <li>Release datetime: {{album.released}}</li>
         <li>Cost: {{album.cost}}</li>
-        <p>---</p>
         {% endfor %}
       </ul>
       {% else %}
       <p>No albums are available for this artist</p>
-      {% endif %}
-      <span>---</span
-      ><br />
-      {% endfor %}
+      {% endif %} {% endfor %}
     </ul>
     {% else %}
     <p>No artists are available</p>
