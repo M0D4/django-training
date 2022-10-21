@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artists</title>
+  </head>
+
+  <body>
+    {% if artist_list %}
+    <span>Artist:</span><br />
+    <ul>
+      {% for artist in artist_list %}
+      <li>id: {{artist.id}}</li>
+      <li>Stage name: {{artist.stage_name}}</li>
+      <li>Social: {{artist.social_link}}</li>
+      {% if artist.album_set.all %}
+      <li>Albums:</li>
+      <ul>
+        {% for album in artist.album_set.all %}
+        <li>id: {{album.id}}</li>
+        <li>Name: {{album.name}}</li>
+        <li>Creation Time: {{album.created}}</li>
+        <li>Release datetime: {{album.released}}</li>
+        <li>Cost: {{album.cost}}</li>
+        <p>---</p>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No albums are available for this artist</p>
+      {% endif %}
+      <span>---</span
+      ><br />
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No artists are available</p>
+    {% endif %}
+  </body>
+</html>
