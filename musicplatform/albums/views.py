@@ -26,9 +26,9 @@ def create(request):
         if not approved:
             approved = False
 
-        album = Album.objects.create(
-            artist=artist, name=name, released=released, cost=cost, approved=approved)
         try:
+            album = Album.objects.create(
+                artist=artist, name=name, released=released, cost=cost, approved=approved)
             context['object'] = album
             context['created'] = True
         except (KeyError, IntegrityError):
