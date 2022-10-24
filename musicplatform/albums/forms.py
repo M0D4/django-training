@@ -6,10 +6,9 @@ from artists.models import Artist
 class AlbumForm(forms.Form):
     artist_list = []
     for artist in Artist.objects.all():
-        artist_list.append(tuple((artist.id, artist.stage_name)))
+        artist_list.append((artist.id, artist.stage_name))
 
-    artist = forms.CharField(
-        label="Artist: ", widget=forms.Select(choices=artist_list))
+    artist = forms.CharField(widget=forms.Select(choices=artist_list))
     name = forms.CharField(required=False)
     release_datetime = forms.DateTimeField()
     cost = forms.DecimalField(required=False)
