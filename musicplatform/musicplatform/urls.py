@@ -17,10 +17,14 @@ from django.contrib import admin
 from django.urls import path
 import artists.views
 import albums.views
+import musicplatform.views
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('artists/create', artists.views.create, name='create'),
-    path('artists/', artists.views.index, name='index'),
-    path('albums/create', albums.views.create, name='create')
+    path('sign-in/', musicplatform.views.SignInView.as_view(), name="sign-in"),
+    path('artists/create',
+         login_required(artists.views.CreateView.as_view()), name='create'),
+    path('artists/', artists.views.IndexView.as_view(), name='index'),
+    path('albums/create', login_required(albums.views.CreateView.as_view()), name='create')
 ]
