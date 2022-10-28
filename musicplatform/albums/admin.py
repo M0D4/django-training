@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Album, Artist
+from .models import Album, Song
+from .forms import SongForm
 
 
 class AlbumAdmin(admin.ModelAdmin):
@@ -11,14 +12,10 @@ class AlbumAdmin(admin.ModelAdmin):
 admin.site.register(Album, AlbumAdmin)
 
 
-class AlbumInline(admin.TabularInline):
-    model = Album
-    extra = 0
+class SongAdmin(admin.ModelAdmin):
+    exclude = ['image_thumbnail']
+    form = SongForm
+    #readonly_fields = ['image_thumbnail']
 
 
-class ArtistAdmin(admin.ModelAdmin):
-    list_display = ['stage_name', 'social_link', 'approved_albums']
-    inlines = [AlbumInline]
-
-
-admin.site.register(Artist, ArtistAdmin)
+admin.site.register(Song, SongAdmin)

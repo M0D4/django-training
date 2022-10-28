@@ -1,5 +1,6 @@
 from django import forms
 from artists.models import Artist
+from albums.models import Song
 
 
 class AlbumForm(forms.Form):
@@ -18,3 +19,16 @@ class AlbumForm(forms.Form):
         cleaned_data = self.cleaned_data
         cleaned_data["name"] = cleaned_data.get("name").strip()
         return cleaned_data
+
+
+class SongForm(forms.ModelForm):
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        cleaned_data["name"] = cleaned_data["name"].strip()
+        if not cleaned_data["name"] or cleaned_data["name"] == "":
+            cleaned_data["name"] = cleaned_data["album"].name
+        return cleaned_data
+
+    class Meta:
+        model = Song
+        fields = ['album', 'name', 'image', 'audio']
