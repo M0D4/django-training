@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'artists',
     'albums',
     'musicplatform',
+    'imagekit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -126,3 +127,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/sign-in/'
+MEDIA_ROOT = 'F:\Bld.ai\Internship\BackEnd\django-training\musicplatform'
+MEDIA_URL = '/'
