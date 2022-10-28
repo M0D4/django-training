@@ -36,12 +36,6 @@ class RemoveAdminDefaultMessageMixin:
         self.remove_default_message(request)
         return response
 
-    def response_queryset_delete(self, request, obj_display, query_set):
-        """override"""
-        response = super().response_queryset_delete(request, obj_display, query_set)
-        self.remove_default_message(request)
-        return response
-
 
 class SongAdmin(RemoveAdminDefaultMessageMixin, admin.ModelAdmin):
     exclude = ['image_thumbnail']
