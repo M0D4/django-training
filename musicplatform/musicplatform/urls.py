@@ -23,7 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('artists.urls')),
     path('', include('albums.urls')),
-    path('auth/', include('rest_framework.urls')),
+    # path('auth/', include('rest_framework.urls')),
+    re_path(r'authentication/', include('authentication.urls')),
+    path('', include('users.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
