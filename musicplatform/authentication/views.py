@@ -1,10 +1,11 @@
-from rest_framework import permissions
+from rest_framework import permissions, generics
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from users.serializers import UserSerializer
 from knox.views import LoginView as KnoxLoginView
 from knox.models import AuthToken
 from rest_framework.response import Response
 from users.models import User
+from .serializers import RegisterSerializer
 
 
 class LoginView(KnoxLoginView):
@@ -21,3 +22,9 @@ class LoginView(KnoxLoginView):
             "token": token,
             "user": UserSerializer(user).data
         })
+
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = [permissions.AllowAny, ]
+    serializer_class = RegisterSerializer
