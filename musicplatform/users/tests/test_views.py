@@ -24,6 +24,11 @@ class TestUserView:
         assert response.data["username"] == self.username
         assert response.data["id"] == 1
 
+    def test_get_user_does_not_exist(self, api_client):
+        client = api_client()
+        response = client.get("/users/1/")
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+
     def test_authenticated_can_put_for_self(self, django_user_model, api_client):
         user = django_user_model.objects.create_user(
             username=self.username, password=self.password)
