@@ -11,5 +11,4 @@ class ArtistList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def list(self, request, *args, **kwargs):
-        print(request.user)
         return super().list(self, request, *args, **kwargs)
