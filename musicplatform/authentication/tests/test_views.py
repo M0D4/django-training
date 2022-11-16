@@ -16,6 +16,15 @@ class TestLogin:
         assert response.data["user"]["username"] == self.username
         assert response.data["token"] is not None
 
+    def test_login_with_invalid_data(self, django_user_model, api_client):
+        user = django_user_model.objects.create_user(
+            username=self.username, password=self.password)
+        client = api_client()
+        obj = {'username': self.username, 'password': self.password + "5555"}
+        response = client.post('/authentication/login/', obj, format='json')
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+        assert response.data["non_field_errors"][0].code == "authorization"
+
     def test_login_post_must_include_username_and_password(self, api_client):
         client = api_client()
         obj = {}
