@@ -21,10 +21,8 @@ class TestLogin:
         obj = {}
         response = client.post('/authentication/login/', obj, format='json')
         assert response.status_code == status.HTTP_400_BAD_REQUEST
-        error_message = response.data['username'][0]
-        assert error_message == "This field is required."
-        error_message = response.data['password'][0]
-        assert error_message == "This field is required."
+        assert response.data['username'][0] == "This field is required."
+        assert response.data['password'][0] == "This field is required."
 
 
 class TestRegister:
@@ -84,11 +82,7 @@ class TestRegister:
         obj = {}
         response = client.post('/authentication/register/', obj, format='json')
         assert response.status_code == status.HTTP_400_BAD_REQUEST
-        error_message = response.data['username'][0]
-        assert error_message == "This field is required."
-        error_message = response.data['email'][0]
-        assert error_message == "This field is required."
-        error_message = response.data['password1'][0]
-        assert error_message == "This field is required."
-        error_message = response.data['password2'][0]
-        assert error_message == "This field is required."
+        assert response.data['username'][0] == "This field is required."
+        assert response.data['email'][0] == "This field is required."
+        assert response.data['password1'][0] == "This field is required."
+        assert response.data['password2'][0] == "This field is required."
