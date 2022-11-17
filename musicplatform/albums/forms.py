@@ -2,10 +2,15 @@ from albums.models import Album
 from django import forms
 from artists.models import Artist
 
+# try to use meta for simplicity as you wrote a lot of code to generate the form -3
+# example
+#  class Meta:
+#         model = Albums
+#         fields = '__all__'
 
 class AlbumForm(forms.Form):
     artist_list = []
-    for artist in Artist.objects.all():
+    for artist in Artist.objects.all(): # not optimized -3
         artist_list.append((artist.id, artist.stage_name))
 
     artist = forms.CharField(widget=forms.Select(choices=artist_list))
