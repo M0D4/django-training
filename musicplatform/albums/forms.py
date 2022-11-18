@@ -4,6 +4,8 @@ from albums.models import Song
 
 
 class AlbumForm(forms.Form):
+    # those lines will not work if I don't have a database called artist so for example if this was my first time to run this project and I have tpo makemigrations I will not be able to do this
+    # because there is not artist table exists so you forgot to take this special case with you -5
     artist_list = []
     for artist in Artist.objects.all():
         artist_list.append((artist.id, artist.stage_name))
