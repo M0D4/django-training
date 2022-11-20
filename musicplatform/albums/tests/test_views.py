@@ -34,6 +34,7 @@ class TestAlbumList:
             'id': artist.id,
             'stage_name': artist.stage_name,
             'social_link': artist.social_link,
+            'user': artist.user.id
         }
         client = api_client(user)
         response = client.post('/albums/', album, format='json')
@@ -82,6 +83,7 @@ class TestAlbumList:
             'id': album.artist.id,
             'stage_name': album.artist.stage_name,
             'social_link': album.artist.social_link,
+            'user': album.artist.user.id
         }
         assert response.status_code == status.HTTP_200_OK
         assert albumDict["id"] == album.id

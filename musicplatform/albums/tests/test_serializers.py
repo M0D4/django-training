@@ -40,6 +40,7 @@ class TestAlbumSerializer:
             'id': artist.id,
             'stage_name': artist.stage_name,
             'social_link': artist.social_link,
+            'user': artist.user.id
         }
         album1_serializer_data = serializer.data[0]
         assert album1_serializer_data["id"] == album1.id
