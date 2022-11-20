@@ -28,11 +28,15 @@ class AlbumListManualFilter(generics.ListCreateAPIView):
 
     def list(self, request, format=None):
         gte = request.GET.get('cost__gte', 0)
-        lte = request.GET.get('cost__lte', 1e18)
+        lte = request.GET.get('cost__lte', None)
         name = request.GET.get('name', '')
 
-        albums = self.queryset.filter(
-            cost__gte=gte, cost__lte=lte, name__icontains=name)
+        if lte:
+            albums = self.queryset.filter(
+                cost__gte=gte, cost__lte=lte, name__icontains=name)
+        else:
+            albums = self.queryset.filter(
+                cost__gte=gte, name__icontains=name)
 
         self.queryset = albums
         return super().list(self, request, format)
