@@ -2,8 +2,6 @@ from albums.models import Album
 from artists.models import Artist
 import pytest
 from albums.serializers import AlbumSerializer
-from datetime import datetime
-import collections
 
 
 @pytest.mark.django_db
