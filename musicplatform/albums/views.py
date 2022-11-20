@@ -15,5 +15,5 @@ class AlbumList(generics.ListCreateAPIView):
     def create(self, request, format=None):
         serializer = AlbumSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(artist=request.user.artist, approved=True)
+        serializer.save(artist=request.user.artist)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
