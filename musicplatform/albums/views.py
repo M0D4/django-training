@@ -3,7 +3,6 @@ from .serializers import AlbumGetSerializer, AlbumPostSerializer
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from users.permissions import IsArtist
-from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
 app_name = 'albums'
@@ -13,7 +12,6 @@ class AlbumList(generics.ListCreateAPIView):
     queryset = Album.objects.all()
     serializer_class = AlbumPostSerializer
     permission_classes = [permissions.AllowAny, IsArtist]
-    # permission_required = "IsArtist"
 
     def list(self, request, format=None):
         albums = Album.objects.get_approved_albums()
