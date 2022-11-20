@@ -17,6 +17,8 @@ Markdown = "^3.4.1"
 django-extensions = "^3.2.1"
 pytest = "^7.2.0"
 pytest-django = "^4.5.2"
+knox = "^0.1.14"
+django-rest-knox = "^4.2.0"
 
 
 [build-system]

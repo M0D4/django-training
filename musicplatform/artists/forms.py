@@ -1,9 +1,11 @@
 from django import forms
+from artists.models import Artist
 
 
-class ArtistForm(forms.Form):
-    stage_name = forms.CharField()
-    social_link = forms.URLField(required=False)
+class ArtistForm(forms.ModelForm):
+    class Meta:
+        model = Artist
+        fields = '__all__'
 
     def clean(self):
         cleaned_data = self.cleaned_data

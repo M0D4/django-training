@@ -6,6 +6,11 @@ from imagekit.processors import ResizeToFill
 from django.core.validators import FileExtensionValidator
 
 
+class AlbumManager(models.Manager):
+    def get_approved_albums(self):
+        return super().get_queryset().filter(approved=True)
+
+
 class Album(TimeStampedModel):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, default="New Album")
@@ -14,6 +19,7 @@ class Album(TimeStampedModel):
         blank=False, max_digits=6, decimal_places=2, default=0)
     approved = models.BooleanField(
         default=False, help_text="Approve the album if its name is not explicit")
+    objects = AlbumManager()
 
     def __str__(self):
         return self.name

@@ -6,6 +6,7 @@ from knox.models import AuthToken
 from rest_framework.response import Response
 from users.models import User
 from .serializers import RegisterSerializer
+from django.contrib.auth import login
 
 
 class LoginView(KnoxLoginView):
@@ -18,6 +19,7 @@ class LoginView(KnoxLoginView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data["user"]
         _, token = AuthToken.objects.create(user)
+        login(request=request, user=user)
         return Response({
             "token": token,
             "user": UserSerializer(user).data
