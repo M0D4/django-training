@@ -1,25 +1,19 @@
 from albums.models import Album
-from .serializers import AlbumGetSerializer, AlbumPostSerializer
+from .serializers import AlbumSerializer
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from users.permissions import IsArtist
-
 
 app_name = 'albums'
 
 
 class AlbumList(generics.ListCreateAPIView):
-    queryset = Album.objects.all()
-    serializer_class = AlbumPostSerializer
-    permission_classes = [permissions.AllowAny, IsArtist]
-
-    def list(self, request, format=None):
-        albums = Album.objects.get_approved_albums()
-        serializer = AlbumGetSerializer(albums, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    queryset = Album.objects.get_approved_albums()
+    serializer_class = AlbumSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsArtist]
 
     def create(self, request, format=None):
-        serializer = AlbumPostSerializer(data=request.data)
+        serializer = AlbumSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(artist=request.user.artist)
+        serializer.save(artist=request.user.artist, approved=True)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
