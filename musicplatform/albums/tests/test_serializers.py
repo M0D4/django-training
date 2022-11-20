@@ -46,14 +46,26 @@ class TestAlbumSerializer:
         album1_serializer_data = serializer.data[0]
         assert album1_serializer_data["id"] == album1.id
         assert album1_serializer_data["name"] == album1.name
-        assert album1_serializer_data["cost"] == str(album1.cost) + "0"
+        assert float(album1_serializer_data["cost"]) == album1.cost
         assert album1_serializer_data["approved"] == album1.approved
         assert album1_serializer_data["released"] == album1.released
         assert dict(album1_serializer_data["artist"]) == artistDict
         album2_serializer_data = serializer.data[1]
         assert serializer.data[1]["id"] == album2.id
         assert album2_serializer_data["name"] == album2.name
-        assert album2_serializer_data["cost"] == str(album2.cost) + "0"
+        assert float(album2_serializer_data["cost"]) == album2.cost
         assert album2_serializer_data["approved"] == album2.approved
         assert album2_serializer_data["released"] == album2.released
         assert dict(album2_serializer_data["artist"]) == artistDict
+
+    def test_invalid_deserializer(self):
+        album = {
+            'name': 'Hello',
+            'cost': '50.00',
+            'approved': True,
+        }
+
+        serializer = AlbumSerializer(data=album)
+        assert not serializer.is_valid()
+        assert serializer.validated_data == {}
+        assert serializer.errors["released"][0] == "This field is required."
